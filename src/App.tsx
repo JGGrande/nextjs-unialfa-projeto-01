@@ -1,6 +1,6 @@
-import './App.css'
 import { Header } from './components/header'
 import { StyledComponetsGlobalTheme } from './global/theme.global'
+import { RoutesMapping } from './routes'
 
 function App() {
 
@@ -8,6 +8,7 @@ function App() {
     <>
       <StyledComponetsGlobalTheme />
       <Header />
+      <RoutesMapping />
     </>
   )
 }
