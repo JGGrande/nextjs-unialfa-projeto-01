@@ -95,6 +95,7 @@ export const Form = ({ fields, buttonText, select, textArea }: IFormProps) => {
       <ButtonContainer>
         <ButtonForm
           type="submit"
+          name="button"
         >
           {buttonText}
         </ButtonForm>
