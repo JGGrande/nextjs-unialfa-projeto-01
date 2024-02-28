@@ -1,4 +1,4 @@
-import { FaHome, FaShoppingBag, FaShoppingCart } from "react-icons/fa";
+import { FaHome, FaMailBulk, FaShoppingBag, FaShoppingCart } from "react-icons/fa";
 import { HeaderContainer, LinksContainer } from "./style"
 
 
@@ -16,6 +16,8 @@ export const Header = () => (
       <a href="/cart">{<FaShoppingCart />} Cart</a>
 
       <a href="/products">{<FaShoppingBag />} Products</a>
+
+      <a href="/contact">{<FaMailBulk />} Contato</a>
 
     </LinksContainer>
 
