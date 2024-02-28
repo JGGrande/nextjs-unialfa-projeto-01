@@ -17,7 +17,7 @@ export const Header = () => (
 
       <a href="/products">{<FaShoppingBag />} Products</a>
 
-      <a href="/contact">{<FaMailBulk />} Contato</a>
+      <a href="/contact">{<FaMailBulk />} Contat</a>
 
     </LinksContainer>
 
