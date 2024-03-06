@@ -6,10 +6,9 @@ export const FormContainer = styled.form`
   justify-content: center;
   align-items: center;
   width: 1200px;
-  padding: 25px;
+  padding: 55px;
   margin: 25px;
-  box-shadow: 0 2px 5px #f5f5f5;
-  background: #f5f5f5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 `
 
 export const FieldInputContainer = styled.div`
@@ -21,16 +20,31 @@ export const FieldInputContainer = styled.div`
     width: calc(100% - 18px);
     padding: 8px;
     margin-bottom: 20px;
-    border: 1px solid #1c87c9;
+    border: 1px solid  var( --black);
     outline: none;
+  }
+  @media (max-width: 720px) {
+    width: calc(100% - 18px);
   }
 `
 export const FieldSelectContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
+  align-items: center;
+  width: 30%;
   gap: 10px;
-  padding: 10px;
+
+  select {
+    width: calc(100% - 18px);
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid  var( --black);
+    outline: none;
+  }
+
+  @media (max-width: 720px) {
+    width: calc(100%);
+  }
 `
 export const FieldTextAreaContainer = styled.div`
   display: flex;
@@ -42,8 +56,11 @@ export const FieldTextAreaContainer = styled.div`
     width: calc(100% - 18px);
     padding: 8px;
     margin-bottom: 20px;
-    border: 1px solid #1c87c9;
+    border: 1px solid  var( --black);
     outline: none;
+  }
+  @media (max-width: 720px) {
+    width: calc(100% - 18px);
   }
 `
 
@@ -59,7 +76,7 @@ export const ButtonForm = styled.button`
   width: 100%;
   padding: 10px;
   border: none;
-  background: #1c87c9;
+  background: var( --black);
   font-size: 16px;
   font-weight: 400;
   color: #fff;

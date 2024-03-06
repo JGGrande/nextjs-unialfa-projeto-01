@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Cart } from "./pages/Cart";
-import { Products } from "./pages/Products/Products";
+import { Products } from "./pages/Products";
 import { Contact } from "./pages/Contact";
 
 export function RoutesMapping() {
