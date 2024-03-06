@@ -33,7 +33,7 @@ export function Contact() {
           select={{
             name: "cidade",
             options: [ "Umuarama", "Tuneiras do Oeste", "Morro cabeça de vento" ],
-            label: "Seleciona um município"
+            label: "Selecione seu município"
           }}
           textArea={{
             placeHolder: "Descrição",
