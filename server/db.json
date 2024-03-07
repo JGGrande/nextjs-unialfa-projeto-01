@@ -1,0 +1,36 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Pen Drive"
+    },
+    {
+      "id": 2,
+      "name": "Mouse"
+    },
+    {
+      "id": 3,
+      "name": "Teclado"
+    },
+    {
+      "id": 4,
+      "name": "Sistemas operacionais"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "title": "PenDrive Sansung",
+      "pricing": 80,
+      "promotion": 70,
+      "img": "https://http2.mlstatic.com/D_NQ_NP_668267-MLB69400096321_052023-O.webp"
+    },
+    {
+      "id": 1,
+      "title": "PenDrive Sansung",
+      "pricing": 80,
+      "promotion": 70,
+      "img": "https://http2.mlstatic.com/D_NQ_NP_668267-MLB69400096321_052023-O.webp"
+    }
+  ]
+}

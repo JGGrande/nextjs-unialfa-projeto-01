@@ -1,28 +1,48 @@
-import { useEffect, useState } from "react"
+
+import { useCallback, useEffect, useState } from "react"
 import { LeftContainer, NavbarContainer, NavbarExtendedContainer, NavbarInnerContainer, NavbarLink, NavbarLinkContainer, NavbarLinkExtended, OpenLinksButton, RightContainer } from "./styles";
 import { FaMailBulk, FaShoppingBag, FaShoppingCart } from "react-icons/fa";
+import { api } from "../../utils/api";
+import axios, { AxiosError, CancelTokenSource } from "axios";
 
-interface IDataCategory {
+interface ICategory {
   id: number;
   name: string;
 }
 
 export const Menu = () => {
   const [ extendsNavbar, setExtendsNavbar ] = useState(false);
-  const [ dataCategory, setDataCategory ] = useState<Array<IDataCategory>>([]);
+  const [ categories, setCategories ] = useState<Array<ICategory>>([]);
+
+  const getCategories = useCallback(async( cancelTokenSource: CancelTokenSource ) => {
+    const response = await api.get("/categories", {
+      cancelToken: cancelTokenSource.token
+    });
+
+    const categorisResponse = response.data as ICategory[];
+
+    setCategories(categorisResponse);
+  }, [  ]);
 
   useEffect(() => {
-    setDataCategory([
-      {
-        id: 1,
-        name: "Eletronicos"
-      },
-      {
-        id: 2,
-        name: "Moveis"
-      }
+    const CancelToken = axios.CancelToken;
+
+    const cancelTokenSource = CancelToken.source()
+
+    Promise.all([
+      getCategories(cancelTokenSource)
     ])
-  }, []);
+      .catch((error: AxiosError) => {
+        if(!axios.isCancel(error)){
+          console.error(error)
+        }
+      })
+
+    return () => {
+      cancelTokenSource.cancel("Component unmounted")
+    }
+
+  }, [ getCategories ]);
 
 
   return (
@@ -49,8 +69,8 @@ export const Menu = () => {
               </NavbarLinkExtended>
               <NavbarLink to={"/"}>Home</NavbarLink>
               {
-                dataCategory.map( category => (
-                  <NavbarLink to={`/categoy/${category.id}`}>
+                categories?.map( category => (
+                  <NavbarLink key={category.id} to={`/categoy/${category.id}`}>
                     {category.name}
                   </NavbarLink>
                 ))
@@ -85,8 +105,8 @@ export const Menu = () => {
                   Home
                 </NavbarLinkExtended>
                 {
-                  dataCategory.map( category => (
-                    <NavbarLinkExtended to={`/categoy/${category.id}`}>
+                  categories.map( category => (
+                    <NavbarLinkExtended key={category.id}  to={`/categoy/${category.id}`}>
                       {category.name}
                     </NavbarLinkExtended>
                   ))
