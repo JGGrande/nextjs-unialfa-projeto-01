@@ -1,37 +1,36 @@
 import { useCallback, useEffect, useState } from "react";
 import { Menu } from "../../components/menu";
 import axios, { AxiosError, CancelTokenSource } from "axios";
-import { api } from "../../utils/api";
 import { Card } from "../../components/card";
+import HomeService from "../../services/Home";
 
 interface IProducts {
   id: number;
   title: string;
+  category_id: number;
   pricing: number;
   promotion: number;
-  img: string;
+  image_g: string;
+  image_p: string;
 }
 
 export function Home(){
   const [ products, setProducts ] = useState<Array<IProducts>>();
 
-  const getProducts = useCallback(async ( cancelTokenSource: CancelTokenSource ) => {
-    const response = await api.get("/products", {
-      cancelToken: cancelTokenSource.token
-    });
+  const getProducts = useCallback(async( cancelTokenSource: CancelTokenSource, homeService: HomeService ) => {
+    const products = await homeService.getProducts(cancelTokenSource);
 
-    const productsRequest = response.data as IProducts[]
-
-    setProducts(productsRequest);
+    setProducts(products);
   }, [ ]);
 
   useEffect(() => {
     const CancelToken = axios.CancelToken;
-
     const cancelTokenSource = CancelToken.source();
 
+    const homeService = new HomeService();
+
     Promise.all([
-      getProducts(cancelTokenSource)
+      getProducts(cancelTokenSource, homeService)
     ])
       .catch((error: AxiosError) => {
         if(!axios.isCancel(error)){
@@ -39,6 +38,10 @@ export function Home(){
         }
       });
 
+
+    return () => {
+      cancelTokenSource.cancel("Component unmounted");
+    }
   },[ getProducts ]);
 
 
@@ -50,14 +53,15 @@ export function Home(){
       <div
         style={{
           display: 'flex',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          flexWrap: 'wrap'
         }}
       >
         {
           products?.map( product => (
             <Card
               key={product.id}
-              img={product.img}
+              img={`https://raw.githubusercontent.com/profchines/imagens1Pitchau/main/Imagens1Pitchau/${product.image_p}`}
               textPricing={product.pricing}
               textPromotion={product.promotion}
               title={product.title}
