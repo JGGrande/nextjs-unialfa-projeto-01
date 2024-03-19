@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { Button, CardBody, ImageCard, ImageContainer, TextButton, TextPricing, TextPromotion, Title } from "./style";
 
@@ -7,9 +8,11 @@ interface ICard {
   textPricing: number;
   textPromotion: number;
   img: string;
+  toUrl: string;
 }
 
-export const Card = ({ key, img, title, textPricing, textPromotion }: ICard) => {
+export const Card = ({ key, img, title, textPricing, textPromotion, toUrl }: ICard) => {
+  const navigate = useNavigate();
 
   return(
     <>
@@ -23,7 +26,9 @@ export const Card = ({ key, img, title, textPricing, textPromotion }: ICard) => 
         <TextPricing>{formatCurrency(textPricing)}</TextPricing>
         <TextPromotion>{formatCurrency(textPromotion)}</TextPromotion>
 
-        <Button>
+        <Button
+          onClick={() => navigate(toUrl)}
+        >
           <TextButton>Detalhes</TextButton>
         </Button>
 

@@ -61,6 +61,7 @@ export function Home(){
           products?.map( product => (
             <Card
               key={product.id}
+              toUrl={`products/${product.id}`}
               img={`https://raw.githubusercontent.com/profchines/imagens1Pitchau/main/Imagens1Pitchau/${product.image_p}`}
               textPricing={product.pricing}
               textPromotion={product.promotion}
