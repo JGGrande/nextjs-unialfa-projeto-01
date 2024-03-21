@@ -3,7 +3,7 @@ import { CancelTokenSource } from "axios";
 
 interface IProductsRequests {
   id: number;
-  title: string;
+  name: string;
   category_id: number;
   pricing: number;
   promotion: number;

@@ -6,7 +6,7 @@ import HomeService from "../../services/Home";
 
 interface IProducts {
   id: number;
-  title: string;
+  name: string;
   category_id: number;
   pricing: number;
   promotion: number;
@@ -65,7 +65,7 @@ export function Home(){
               img={`https://raw.githubusercontent.com/profchines/imagens1Pitchau/main/Imagens1Pitchau/${product.image_p}`}
               textPricing={product.pricing}
               textPromotion={product.promotion}
-              title={product.title}
+              title={product.name}
             />
           ))
         }
