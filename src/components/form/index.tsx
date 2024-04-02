@@ -2,12 +2,13 @@ import { FormEvent, HTMLInputTypeAttribute } from "react";
 import { CSSProperties } from "styled-components";
 import { ButtonContainer, ButtonForm, FieldInputContainer, FieldSelectContainer, FieldTextAreaContainer, FormContainer } from "./style";
 
-interface IFieldInput {
+interface IFieldInput<T>{
   label?: string;
   placeholder?: string;
   type: HTMLInputTypeAttribute
   name: string;
   style?: CSSProperties;
+  value?: string | number;
 }
 interface IFieldTextArea {
   label?: string;
@@ -23,17 +24,36 @@ interface IFieldSelect {
 }
 
 interface IFormProps {
-  fields: IFieldInput[];
+  fields: IFieldInput<string | number>[];
   buttonText: string;
   textArea?: IFieldTextArea;
   select?: IFieldSelect;
+  sendToApi: (data: any) => Promise<void>;
 }
 
-export const Form = ({ fields, buttonText, select, textArea }: IFormProps) => {
+export const Form = ({ fields, buttonText, select, textArea, sendToApi }: IFormProps) => {
 
   const handleSubmitForm = ( event: FormEvent<HTMLFormElement> ) => {
     event.preventDefault();
-    window.alert("Enviado")
+    const formData = {} as Record<string, string | number>;
+    const formElements:any = event.target;
+
+    fields.forEach(field => {
+      const input = formElements.elements.namedItem(field.name) as HTMLInputElement;
+      formData[field.name] = input.value;
+    });
+
+    if(select){
+      const $select = formElements.elements.namedItem(select.name) as HTMLSelectElement;
+      formData[select.name] = $select.value;
+    }
+
+    if(textArea){
+      const $textArea = formElements.elements.namedItem(textArea.name) as HTMLTextAreaElement;
+      formData[textArea.name] = $textArea.value;
+    }
+
+    sendToApi(formData);
   }
 
   return (

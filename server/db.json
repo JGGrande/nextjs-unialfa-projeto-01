@@ -138,5 +138,21 @@
       "image_g": "pendrives/pendrive3g.jpg",
       "image_p": "pendrives/pendrive3p.jpg"
     }
+  ],
+  "contacts": [
+    {
+      "id": "46eb",
+      "email": "joaogabriel7303@gmail.com",
+      "telefone": "tet2626",
+      "cidade": "Umuarama",
+      "descricao": ""
+    },
+    {
+      "id": "4fe1",
+      "email": "joaogabriel7303@gmail.com",
+      "telefone": "tet2626",
+      "cidade": "Umuarama",
+      "descricao": "aaaaa"
+    }
   ]
 }

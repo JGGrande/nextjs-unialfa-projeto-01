@@ -1,7 +1,11 @@
 import { Form } from "../../components/form";
 import { Menu } from "../../components/menu";
+import ContactService from "../../services/Contact";
 
 export function Contact() {
+
+  const contactService = new ContactService();
+
   return (
     <>
       <Menu />
@@ -18,6 +22,7 @@ export function Contact() {
 
         <Form
           buttonText="Enviar"
+          sendToApi={contactService.create}
           fields={[
             {
               placeholder: "Email",
