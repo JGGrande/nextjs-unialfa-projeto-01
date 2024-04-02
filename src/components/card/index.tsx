@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "../../utils/formatCurrency";
-import { Button, CardBody, ImageCard, ImageContainer, TextButton, TextPricing, TextPromotion, Title } from "./style";
+import { Button, CardBody, ImageContainer, TextButton, TextPricing, TextPromotion, Title } from "./style";
 import { CachedImage } from "../cachedImage";
 
 interface ICard {

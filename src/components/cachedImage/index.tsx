@@ -27,13 +27,10 @@ export const CachedImage = ({ imgUrl, styles }: IProps) => {
     }
 
     if(!imageOnStorageString){
-      console.debug("Não foram encontrados imagem no cache, criando...")
       imageData.img = await convertImageToBase64({ imgUrl })
-      console.debug(imageData.img)
       imageData.expireIn = imageExpireInTime
 
       localStorage.setItem(`cached-image-${imgUrl}`, JSON.stringify(imageData))
-      console.debug("Adicionado no storage")
       return imageData
     }
 
