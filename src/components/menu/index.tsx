@@ -90,7 +90,7 @@ export const Menu = () => {
               <FaShoppingBag size={22} />
             </NavbarLink>
             <NavbarLink
-              to={"/contact"}
+              to={"/contacts"}
             >
               <FaMailBulk size={22} />
             </NavbarLink>

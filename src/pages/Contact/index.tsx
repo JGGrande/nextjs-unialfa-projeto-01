@@ -2,7 +2,7 @@ import { Form } from "../../components/form";
 import { Menu } from "../../components/menu";
 import ContactService from "../../services/Contact";
 
-export function Contact() {
+export default function Contact() {
 
   const contactService = new ContactService();
 
@@ -30,19 +30,19 @@ export function Contact() {
               name: "email",
             },
             {
-              name: "telefone",
+              name: "phone",
               type: "tel",
               placeholder: "Telefone"
             }
           ]}
           select={{
-            name: "cidade",
+            name: "city",
             options: [ "Umuarama", "Tuneiras do Oeste", "Morro cabeça de vento" ],
             label: "Selecione seu município"
           }}
           textArea={{
-            placeHolder: "Descrição",
-            name: "descricao"
+            placeHolder: "description",
+            name: "description"
           }}
         />
       </div>

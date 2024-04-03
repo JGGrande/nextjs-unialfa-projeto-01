@@ -12,4 +12,15 @@ export default class ContactService {
     await api.post('/contacts', data);
     console.log("Enviado")
   }
+
+  public async findMany(){
+    const response = await api.get('/contacts');
+    return response.data;
+  }
+
+  public async findById(id: string){
+    const response = await api.get(`/contacts/${id}`)
+    return response.data;
+  }
+
 }

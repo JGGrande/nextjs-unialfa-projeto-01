@@ -1,6 +1,7 @@
 import { FormEvent, HTMLInputTypeAttribute } from "react";
 import { CSSProperties } from "styled-components";
 import { ButtonContainer, ButtonForm, FieldInputContainer, FieldSelectContainer, FieldTextAreaContainer, FormContainer } from "./style";
+import { useNavigate } from "react-router-dom";
 
 interface IFieldInput<T>{
   label?: string;
@@ -33,7 +34,9 @@ interface IFormProps {
 
 export const Form = ({ fields, buttonText, select, textArea, sendToApi }: IFormProps) => {
 
-  const handleSubmitForm = ( event: FormEvent<HTMLFormElement> ) => {
+  const navigation = useNavigate();
+
+  const handleSubmitForm = async ( event: FormEvent<HTMLFormElement> ) => {
     event.preventDefault();
     const formData = {} as Record<string, string | number>;
     const formElements:any = event.target;
@@ -53,7 +56,9 @@ export const Form = ({ fields, buttonText, select, textArea, sendToApi }: IFormP
       formData[textArea.name] = $textArea.value;
     }
 
-    sendToApi(formData);
+    await sendToApi(formData);
+
+    navigation("/contacts")
   }
 
   return (
