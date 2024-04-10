@@ -3,16 +3,7 @@ import { Menu } from "../../components/menu";
 import axios, { AxiosError, CancelTokenSource } from "axios";
 import { Card } from "../../components/card";
 import HomeService from "../../services/Home";
-
-interface IProducts {
-  id: number;
-  name: string;
-  category_id: number;
-  pricing: number;
-  promotion: number;
-  image_g: string;
-  image_p: string;
-}
+import { IProducts } from "../../types";
 
 export function Home(){
   const [ products, setProducts ] = useState<Array<IProducts>>();

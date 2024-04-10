@@ -41,7 +41,7 @@ export const Button = styled.button`
   border: 0;
   padding: 15px;
   border-radius: 8px;
-  background-color: var(--gren);
+  background-color: #03bb85; //var(--gren);
   :hover {
     filter: brightness(1.15);
   }
@@ -49,5 +49,5 @@ export const Button = styled.button`
 `;
 
 export const TextButton = styled.h3`
-  color: var(--white);
+  color:  #fff;
 `;
