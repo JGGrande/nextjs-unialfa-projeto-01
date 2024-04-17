@@ -10,16 +10,32 @@ export function Cart(){
   const [cart, setCart] = useState<ICart[]>();
 
   const [totalPricing, setTotalPricing] = useState<number>(0);
+  const [totalPromotion, setTotalPromotion] = useState<number>(0);
 
-  const updateTotal = useCallback(() => {
+  const updateTotal = useCallback(( cart: ICart[] ) => {
     if(cart?.length){
       const totalPricingCalculated = cart.reduce((total, product) => {
         return product.totalPricing + total
-      }, totalPricing);
+      }, 0);
+
+      const totalPromotionCalculated = cart.reduce((total, product) => {
+        return product.totalPromotion + total
+      }, 0);
 
       setTotalPricing(totalPricingCalculated);
+      setTotalPromotion(totalPromotionCalculated);
     }
-  }, [ cart, totalPricing ])
+  }, [ ]);
+
+  const removeProductOnCart = useCallback((productId: number) => {
+    const productsFiltred = cart!.filter( cart => cart.id !== productId );
+
+    localStorage.setItem("@1pitchau:cart", JSON.stringify(productsFiltred));
+
+    setCart(productsFiltred);
+    updateTotal(productsFiltred);
+
+  }, [ cart, updateTotal ]);
 
   useEffect(() => {
     const cartLocalStorage = localStorage.getItem("@1pitchau:cart")
@@ -29,9 +45,8 @@ export function Cart(){
     if(cartLocalStorage){
       cartLs = JSON.parse(cartLocalStorage);
       setCart(cartLs);
+      updateTotal(cartLs);
     }
-
-    updateTotal()
 
   },[ updateTotal ]);
 
@@ -57,7 +72,7 @@ export function Cart(){
                 }}
               >Nome do produto</THTh>
               <THTh>Quantidade</THTh>
-              <THTh>Vlr. Unit.</THTh>
+              <THTh>Vlr. Promo.</THTh>
               <THTh>Vlr. Total.</THTh>
               <THTh>Ações</THTh>
             </THtr>
@@ -66,7 +81,7 @@ export function Cart(){
             {
               cart?.map( cart => {
                 return (
-                  <TBTr>
+                  <TBTr key={cart.id} >
                     <Td width={300}>{cart.name}</Td>
                     <Td>{cart.quantity}</Td>
                     <Td>{formatCurrency(cart.totalPromotion)}</Td>
@@ -74,6 +89,7 @@ export function Cart(){
                     <Td>
                       <Button
                         type="button"
+                        onClick={() => removeProductOnCart(cart.id)}
                       >
                         <TextButton>
                           <FaTrash />
@@ -89,10 +105,15 @@ export function Cart(){
             <TBTr>
               <Td width={300}>Valor Total:</Td>
               <Td></Td>
-              <Td></Td>
               <Td
                 style={{
                   fontWeight: "bold"
+                }}
+              >{formatCurrency(totalPromotion)}</Td>
+              <Td
+                style={{
+                  fontWeight: "bold",
+                  textDecoration: "line-through"
                 }}
               >{formatCurrency(totalPricing)}</Td>
               <Td></Td>

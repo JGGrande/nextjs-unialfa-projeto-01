@@ -41,7 +41,18 @@ export default function ProductsDetails(){
           //pega os que já existe adiciona no final
           const cartLs = JSON.parse(cartLocalStorage) as ICart[];
 
-          cartLs.push(productData);
+          const productAlreadyExitsOnCart = cartLs.find(cart => cart.id === productData.id);
+
+          if(productAlreadyExitsOnCart){
+            const newQuantity = +productData.quantity + Number(productAlreadyExitsOnCart.quantity);
+
+            productAlreadyExitsOnCart.quantity = newQuantity;
+            productAlreadyExitsOnCart.totalPricing = +productData.totalPricing * newQuantity;
+            productAlreadyExitsOnCart.totalPromotion = +productData.totalPromotion * newQuantity;
+
+          }else {
+            cartLs.push(productData);
+          }
 
           cart = cartLs;
         }else {
